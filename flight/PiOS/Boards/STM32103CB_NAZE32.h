@@ -61,7 +61,7 @@ TIM4  |  RC In 1  |  Servo 3  |  Servo 2  |  Servo 1
 // BOOTLOADER_SETTINGS
 //------------------------
 #define BOARD_READABLE	TRUE
-#define BOARD_WRITABLE	TRUE
+#define BOARD_WRITABLE	FALSE
 #define MAX_DEL_RETRYS	3
 
 
@@ -109,20 +109,6 @@ TIM4  |  RC In 1  |  Servo 3  |  Servo 2  |  Servo 1
 #define PIOS_I2C_MAX_DEVS			1
 extern uint32_t pios_i2c_flexi_adapter_id;
 #define PIOS_I2C_MAIN_ADAPTER		(pios_i2c_flexi_adapter_id)
-#define PIOS_I2C_ESC_ADAPTER		(pios_i2c_flexi_adapter_id)
-#define PIOS_I2C_BMP085_ADAPTER		(pios_i2c_flexi_adapter_id)
-
-//------------------------
-// PIOS_BMP085
-//------------------------
-#define PIOS_BMP085_OVERSAMPLING	3
-
-//-------------------------
-// SPI
-//
-// See also pios_board.c
-//-------------------------
-#define PIOS_SPI_MAX_DEVS			2
 
 //-------------------------
 // PIOS_USART
@@ -140,8 +126,10 @@ extern uint32_t pios_com_telem_rf_id;
 #define PIOS_COM_TELEM_RF               (pios_com_telem_rf_id)
 #define PIOS_COM_DEBUG                  PIOS_COM_TELEM_RF
 
-extern uint32_t pios_com_telem_usb_id;
-#define PIOS_COM_TELEM_USB              (pios_com_telem_usb_id)
+#if defined(PIOS_INCLUDE_GPS)
+extern uint32_t pios_com_gps_id;
+#define PIOS_COM_GPS                    (pios_com_gps_id)
+#endif	/* PIOS_INCLUDE_GPS */
 
 //------------------------
 // PIOS_RCVR
@@ -182,14 +170,4 @@ extern uint32_t pios_com_telem_usb_id;
 #define PIOS_GPIO_CLKS				{  }
 #define PIOS_GPIO_NUM				0
 
-
-//-------------------------
-// USB
-//-------------------------
-#define PIOS_USB_HID_MAX_DEVS		1
-
-#define PIOS_USB_ENABLED			1
-#define PIOS_USB_DETECT_GPIO_PORT	GPIOB
-#define PIOS_USB_MAX_DEVS			1
-#define PIOS_USB_DETECT_GPIO_PIN	GPIO_Pin_2
 #endif /* STM32103CB_CC_H_ */

@@ -70,7 +70,7 @@ FLASH_TOOL = OPENOCD
 # Optional module and driver defaults
 USE_CAMERASTAB ?= YES
 USE_COMUSBBRIDGE ?= NO
-USE_GPS ?= NO
+USE_GPS ?= YES
 USE_TXPID ?= YES
 USE_I2C ?= YES
 USE_USB ?= NO

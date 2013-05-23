@@ -56,10 +56,10 @@
 
 /* Supported USART-based PIOS modules */
 #define PIOS_INCLUDE_TELEMETRY_RF
-//#define PIOS_INCLUDE_GPS
-//#define PIOS_GPS_MINIMAL
-//#define PIOS_INCLUDE_GPS_NMEA_PARSER /* Include the NMEA protocol parser */
-//#define PIOS_INCLUDE_GPS_UBX_PARSER  /* Include the UBX protocol parser */
+#define PIOS_INCLUDE_GPS
+#define PIOS_GPS_MINIMAL
+#define PIOS_INCLUDE_GPS_NMEA_PARSER /* Include the NMEA protocol parser */
+#define PIOS_INCLUDE_GPS_UBX_PARSER  /* Include the UBX protocol parser */
 #define PIOS_INCLUDE_SERVO
 //#define PIOS_INCLUDE_SPI
 #define PIOS_INCLUDE_SYS
@@ -75,6 +75,8 @@
 
 #define PIOS_INCLUDE_MPU6050
 #define PIOS_MPU6050_ACCEL
+/* Uncomment next line to enable fourth order filter */
+//#define ACCEL_FILTER_USE_FOURTH_ORDER
 
 /* A really shitty setting saving implementation */
 //#define PIOS_INCLUDE_FLASH
@@ -97,7 +99,9 @@
 #define PIOS_STABILIZATION_STACK_SIZE   524
 #define PIOS_TELEM_STACK_SIZE           500
 #define PIOS_EVENTDISPATCHER_STACK_SIZE 130
+#ifndef IDLE_COUNTS_PER_SEC_AT_NO_LOAD
 #define IDLE_COUNTS_PER_SEC_AT_NO_LOAD  1995998
+#endif
 //#define PIOS_QUATERNION_STABILIZATION
 
 // This can't be too high to stop eventdispatcher thread overflowing

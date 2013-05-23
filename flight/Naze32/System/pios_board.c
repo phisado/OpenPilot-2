@@ -54,6 +54,10 @@ uint32_t pios_rcvr_group_map[MANUALCONTROLSETTINGS_CHANNELGROUPS_NONE];
 #define PIOS_COM_TELEM_RF_TX_BUF_LEN 12
 
 uint32_t pios_com_telem_rf_id;
+#ifdef PIOS_INCLUDE_GPS
+#define PIOS_COM_GPS_RX_BUF_LEN 32
+uint32_t pios_com_gps_id;
+#endif
 
 /**
  * Configuration for MPU6050 chip
@@ -293,6 +297,22 @@ void PIOS_Board_Init(void) {
 			pios_rcvr_group_map[MANUALCONTROLSETTINGS_CHANNELGROUPS_PPM] = pios_ppm_rcvr_id;
 		}
 #endif	/* PIOS_INCLUDE_PPM */
+#if defined(PIOS_INCLUDE_GPS)
+		{
+			uint32_t pios_usart_generic_id;
+			if (PIOS_USART_Init(&pios_usart_generic_id, &pios_usart_generic_rcvr_cfg)) {
+				PIOS_Assert(0);
+			}
+
+			uint8_t * rx_buffer = (uint8_t *) pvPortMalloc(PIOS_COM_GPS_RX_BUF_LEN);
+			PIOS_Assert(rx_buffer);
+			if (PIOS_COM_Init(&pios_com_gps_id, &pios_usart_com_driver, pios_usart_generic_id,
+					  rx_buffer, PIOS_COM_GPS_RX_BUF_LEN,
+					  NULL, 0)) {
+				PIOS_Assert(0);
+			}
+		}
+#endif	/* PIOS_INCLUDE_GPS */
 		break;
 	case HWSETTINGS_CC_RCVRPORT_PPMPWM:
 		/* This is a combination of PPM and PWM inputs */

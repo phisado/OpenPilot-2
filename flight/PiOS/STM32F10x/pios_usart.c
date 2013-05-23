@@ -79,6 +79,7 @@ static struct pios_usart_dev * PIOS_USART_alloc(void)
 	usart_dev = (struct pios_usart_dev *)pvPortMalloc(sizeof(*usart_dev));
 	if (!usart_dev) return(NULL);
 
+    memset(usart_dev, 0, sizeof(*usart_dev));
 	usart_dev->magic = PIOS_USART_DEV_MAGIC;
 	return(usart_dev);
 }

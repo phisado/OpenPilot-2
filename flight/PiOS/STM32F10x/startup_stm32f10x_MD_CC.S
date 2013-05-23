@@ -178,6 +178,25 @@ Default_Handler:
 Infinite_Loop:
   b  Infinite_Loop
   .size  Default_Handler, .-Default_Handler
+
+
+#if defined(__CROSSWORKS_ARM) && !defined(STARTUP_FROM_RESET)
+/**
+ *   This definition is not defined by default on this target because the
+ *   debugger is unable to reset this target and maintain control of it over the
+ *   JTAG interface. The advantage of doing this is that it allows the debugger
+ *   to reset the CPU and run programs from a known reset CPU state on each run.
+ *   It also acts as a safety net if you accidently download a program in FLASH
+ *   that crashes and prevents the debugger from taking control over JTAG
+ *   rendering the target unusable over JTAG. The obvious disadvantage of doing
+ *   this is that your application will not startup without the debugger.
+*/
+  .section .text, "ax"
+  .thumb_func
+reset_wait:
+1: b 1b /* endless loop */
+#endif /* __CROSSWORKS_ARM && !STARTUP_FROM_RESET */
+
 /******************************************************************************
 *
 * The minimal vector table for a Cortex M3.  Note that the proper constructs
@@ -192,7 +211,11 @@ Infinite_Loop:
     
 g_pfnVectors:
   .word  _irq_stack_top
+#if defined(__CROSSWORKS_ARM) && !defined(STARTUP_FROM_RESET)
+  .word  reset_wait
+#else
   .word  Reset_Handler
+#endif /* STARTUP_FROM_RESET */
   .word  NMI_Handler
   .word  HardFault_Handler
   .word  MemManage_Handler
