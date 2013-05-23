@@ -73,6 +73,7 @@
 #define PIOS_INCLUDE_WDG
 #define PIOS_INCLUDE_BL_HELPER
 
+#define PIOS_INCLUDE_MS5611
 #define PIOS_INCLUDE_MPU6050
 #define PIOS_MPU6050_ACCEL
 /* Uncomment next line to enable fourth order filter */
@@ -93,12 +94,12 @@
 #define CPULOAD_LIMIT_CRITICAL		95
 
 /* Task stack sizes */
-#define PIOS_ACTUATOR_STACK_SIZE       1020
-#define PIOS_MANUAL_STACK_SIZE          800
-#define PIOS_SYSTEM_STACK_SIZE          660
+#define PIOS_ACTUATOR_STACK_SIZE        724 // 1020
+#define PIOS_MANUAL_STACK_SIZE          696 // 800
+#define PIOS_SYSTEM_STACK_SIZE          452 // 660
 #define PIOS_STABILIZATION_STACK_SIZE   524
 #define PIOS_TELEM_STACK_SIZE           500
-#define PIOS_EVENTDISPATCHER_STACK_SIZE 130
+#define PIOS_EVENTDISPATCHER_STACK_SIZE 64  // 130
 #ifndef IDLE_COUNTS_PER_SEC_AT_NO_LOAD
 #define IDLE_COUNTS_PER_SEC_AT_NO_LOAD  1995998
 #endif

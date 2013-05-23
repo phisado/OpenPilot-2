@@ -983,8 +983,10 @@ int32_t PIOS_I2C_Transfer(uint32_t i2c_id, const struct pios_i2c_txn txn_list[],
 #ifdef USE_FREERTOS
 	/* Unlock the bus */
 	xSemaphoreGive(i2c_adapter->sem_busy);
+#if defined(PIOS_I2C_DIAGNOSTICS)
 	if(!semaphore_success)
 		i2c_timeout_counter++;
+#endif
 #endif /* USE_FREERTOS */
 
 	return !semaphore_success ? -2 :
@@ -1123,8 +1125,9 @@ void PIOS_I2C_ER_IRQ_Handler(uint32_t i2c_id)
 	bool valid = PIOS_I2C_validate(i2c_adapter);
 	PIOS_Assert(valid)
 
-#if defined(PIOS_I2C_DIAGNOSTICS)
 	uint32_t event = I2C_GetLastEvent(i2c_adapter->cfg->regs);
+
+#if defined(PIOS_I2C_DIAGNOSTICS)
 
 	i2c_erirq_history[i2c_erirq_history_pointer] = event;
 	i2c_erirq_history_pointer = (i2c_erirq_history_pointer + 1) % 5;
@@ -1132,7 +1135,9 @@ void PIOS_I2C_ER_IRQ_Handler(uint32_t i2c_id)
 #endif
 
 	if(event & I2C_FLAG_AF) {
+#if defined(PIOS_I2C_DIAGNOSTICS)
 		i2c_nack_counter++;
+#endif
 
 		I2C_ClearFlag(i2c_adapter->cfg->regs, I2C_FLAG_AF);
 

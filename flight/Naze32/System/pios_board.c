@@ -60,6 +60,21 @@ uint32_t pios_com_gps_id;
 #endif
 
 /**
+ * Configuration for the MS5611 chip
+ */
+#if defined(PIOS_INCLUDE_MS5611)
+#include "pios_ms5611.h"
+static const struct pios_ms5611_cfg pios_ms5611_cfg = {
+	.oversampling = 1,
+};
+static void PIOS_MS5611_Init_Task(void *parameters)
+{
+	PIOS_MS5611_Init(&pios_ms5611_cfg, PIOS_I2C_MAIN_ADAPTER);
+    vTaskDelete(NULL);
+}
+#endif /* PIOS_INCLUDE_MS5611 */
+
+/**
  * Configuration for MPU6050 chip
  */
 #if defined(PIOS_INCLUDE_MPU6050)
@@ -376,9 +391,25 @@ void PIOS_Board_Init(void) {
 
 	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
 
-#if defined(PIOS_INCLUDE_MPU6050) && defined(PIOS_INCLUDE_I2C)
-	PIOS_MPU6050_Init(pios_i2c_flexi_adapter_id, PIOS_MPU6050_I2C_ADD_A0_LOW, &pios_mpu6050_cfg);
-#endif /* PIOS_INCLUDE_MPU6050 */
+#if defined(PIOS_INCLUDE_I2C)
+
+#if defined(PIOS_INCLUDE_MS5611)
+	int result = xTaskCreate(
+		PIOS_MS5611_Init_Task,
+		(const signed char *)"MS5611Init",
+		(384 / 4),
+		NULL,
+		(tskIDLE_PRIORITY + 3),
+		NULL
+	);
+	PIOS_Assert(result == pdPASS);
+#endif
+
+#if defined(PIOS_INCLUDE_MPU6050)
+	PIOS_MPU6050_Init(PIOS_I2C_MAIN_ADAPTER, PIOS_MPU6050_I2C_ADD_A0_LOW, &pios_mpu6050_cfg);
+#endif
+
+#endif /* PIOS_INCLUDE_I2C */
 
 	PIOS_GPIO_Init();
 

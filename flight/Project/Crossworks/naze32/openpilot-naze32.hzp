@@ -58,7 +58,7 @@
           <file file_name="flight/PiOS/STM32F10x/pios_usart.c"/>
           <file file_name="flight/PiOS/STM32F10x/pios_irq.c"/>
           <file file_name="flight/PiOS/STM32F10x/pios_servo.c"/>
-          <file file_name="flight/PiOS/STM32F10x/pios_i2c_alt.c"/>
+          <file file_name="flight/PiOS/STM32F10x/pios_i2c.c"/>
           <file file_name="flight/PiOS/STM32F10x/pios_ppm.c"/>
           <file file_name="flight/PiOS/STM32F10x/pios_pwm.c"/>
           <file file_name="flight/PiOS/STM32F10x/pios_debug.c"/>
@@ -117,6 +117,7 @@
           <file file_name="flight/PiOS/Common/pios_com.c"/>
           <file file_name="flight/PiOS/Common/pios_rcvr.c"/>
           <file file_name="flight/PiOS/Common/pios_gcsrcvr.c"/>
+          <file file_name="flight/PiOS/Common/pios_ms5611.c"/>
         </folder>
         <folder Name="Board">
           <file file_name="flight/PiOS/Boards/STM32103CB_NAZE32.h"/>
@@ -161,12 +162,7 @@
           <file file_name="flight/Modules/TxPID/txpid.c"/>
         </folder>
         <folder Name="Altitude" file_name="">
-          <file file_name="flight/Modules/Altitude/altitude.c">
-            <configuration Name="Common" build_exclude_from_build="Yes"/>
-          </file>
-          <file file_name="flight/Modules/Altitude/revolution/altitude.c">
-            <configuration Name="Common" build_exclude_from_build="Yes"/>
-          </file>
+          <file file_name="flight/Modules/Altitude/revolution/altitude.c"/>
         </folder>
         <folder Name="Autotune" file_name="">
           <file file_name="flight/Modules/Autotune/autotune.c"/>
@@ -190,6 +186,7 @@
             <file file_name="flight/Naze32/System/inc/openpilot.h"/>
           </folder>
         </folder>
+        <file file_name="flight/Naze32/pios_board_info.c"/>
       </folder>
       <folder Name="UAVTalk">
         <file file_name="flight/UAVTalk/uavtalk.c"/>

@@ -30,7 +30,7 @@
 #ifndef PIOS_I2C_H
 #define PIOS_I2C_H
 
-#define PIOS_I2C_DIAGNOSTICS
+//#define PIOS_I2C_DIAGNOSTICS
 
 #include <stdbool.h>
 

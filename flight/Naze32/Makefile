@@ -175,6 +175,7 @@ SRC += $(OPSYSTEM)/alarms.c
 SRC += $(OPUAVTALK)/uavtalk.c
 SRC += $(OPUAVOBJ)/uavobjectmanager.c
 SRC += $(OPUAVOBJ)/eventdispatcher.c
+SRC += ./pios_board_info.c
 else
 ## TESTCODE
 SRC += $(OPTESTS)/test_common.c
@@ -235,8 +236,7 @@ SRC += $(PIOSSTM32F10X)/pios_usart.c
 SRC += $(PIOSSTM32F10X)/pios_irq.c
 ##SRC += $(PIOSSTM32F10X)/pios_adc.c
 SRC += $(PIOSSTM32F10X)/pios_servo.c
-##SRC += $(PIOSSTM32F10X)/pios_i2c.c
-SRC += $(PIOSSTM32F10X)/pios_i2c_alt.c
+SRC += $(PIOSSTM32F10X)/pios_i2c.c
 ##SRC += $(PIOSSTM32F10X)/pios_spi.c
 SRC += $(PIOSSTM32F10X)/pios_ppm.c
 SRC += $(PIOSSTM32F10X)/pios_pwm.c
@@ -275,6 +275,7 @@ SRC += $(PIOSCOMMON)/pios_flashfs_compact.c
 ##SRC += $(PIOSCOMMON)/pios_adxl345.c
 ##SRC += $(PIOSCOMMON)/pios_mpu6000.c
 SRC += $(PIOSCOMMON)/pios_mpu6050.c
+SRC += $(PIOSCOMMON)/pios_ms5611.c
 SRC += $(PIOSCOMMON)/pios_com.c
 #SRC += $(PIOSCOMMON)/pios_i2c_esc.c
 #SRC += $(PIOSCOMMON)/pios_bmp085.c
