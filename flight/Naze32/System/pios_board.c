@@ -158,15 +158,6 @@ void PIOS_Board_Init(void) {
 	PIOS_LED_Init(led_cfg);
 #endif	/* PIOS_INCLUDE_LED */
 
-#if defined(PIOS_INCLUDE_SPI)
-	/* Set up the SPI interface to the serial flash */
-
-	if (PIOS_SPI_Init(&pios_spi_generic_id, &pios_spi_generic_cfg)) {
-		PIOS_Assert(0);
-	}
-
-#endif
-
 #if defined (PIOS_INCLUDE_FLASH_INTERNAL)
 	PIOS_Flash_Internal_Init(&flash_cfg);
 	PIOS_FLASHFS_Compact_Init(&flashfs_cfg);
