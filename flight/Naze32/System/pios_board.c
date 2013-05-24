@@ -125,14 +125,14 @@ static const struct pios_mpu6050_cfg pios_mpu6050_cfg = {
 
 #if defined(PIOS_INCLUDE_FLASH_INTERNAL)
 static const struct flashfs_compact_cfg flashfs_cfg = {
-	.addr_chip_begin = 		0x0801C000,		//right after the main firmware (32kb)
-	.addr_scratchpad = 		0x0801C000,		//two empty sectora which are being used as a scratchpad
-	.addr_obj_table_magic = 0x0801C800,
-	.addr_obj_table_start = 0x0801C810,		//leave some room for the table magic
-	.addr_obj_table_end = 	0x0801D000,		//right after the second sector - this tables takes 127 entries with 16 bytes each
-	.addr_files =			0x0801D000,
-	.chip_size = 			0x00004000,		//right before the main firmware (32kb)
-	.sector_size = 			0x00000400,		//always 1024 for STM32F103
+	.addr_chip_begin = 		EE_BANK_BASE,		 //right after the main firmware (32kb)
+	.addr_scratchpad = 		EE_BANK_BASE,		 //two empty sectora which are being used as a scratchpad
+	.addr_obj_table_magic = EE_BANK_BASE+0x800,
+	.addr_obj_table_start = EE_BANK_BASE+0x810,	 //leave some room for the table magic
+	.addr_obj_table_end = 	EE_BANK_BASE+0x1000, //right after the second sector - this tables takes 127 entries with 16 bytes each
+	.addr_files =			EE_BANK_BASE+0x1000,
+	.chip_size = 			EE_BANK_SIZE,
+	.sector_size = 			0x00000400,			 //always 1024 for STM32F103
 	.table_magic = 			0x854a1ab0,
 	.obj_magic = 			0x170fbc23,
 };

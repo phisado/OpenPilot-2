@@ -45,16 +45,17 @@ SECTIONS
     _sidata = .;
 
     /* fw_version_blob */
-    .fw_version_blob 0x0801BF9C : AT(0x0801BF9C)
+    _fw_version_blob = FW_BANK_BASE + FW_BANK_SIZE - FW_DESC_SIZE;
+    .fw_version_blob _fw_version_blob : AT(_fw_version_blob)
     {
         KEEP(*(.fw_version_blob))
         . = . + 100 ;
     } >FLASH
     
     /* flashfs (reservation) */
-    .flashfs 0x0801C000 (NOLOAD) : AT(0x0801C000)
+    .flashfs EE_BANK_BASE (NOLOAD) : AT(EE_BANK_BASE)
     {
-        . = . + 0x00004000 ;
+        . = . + EE_BANK_SIZE ;
     } >FLASH
 
     /*

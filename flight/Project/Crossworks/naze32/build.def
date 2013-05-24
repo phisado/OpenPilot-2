@@ -1,0 +1,10 @@
+#define USE_STM32103CB_NAZE32   1
+
+#define USE_I2C
+#define USE_GPS
+#define MODULE_Attitude_BUILTIN
+#define MODULE_Stabilization_BUILTIN
+#define MODULE_Actuator_BUILTIN
+#define MODULE_ManualControl_BUILTIN
+#define MODULE_FirmwareIAP_BUILTIN
+#define MODULE_Telemetry_BUILTIN
