@@ -83,3 +83,5 @@ androidgcs/bin/
 androidgcs/gen/
 /.cproject
 /.project
+/flight/Project/Crossworks/naze32/linker.def
+/flight/Project/Crossworks/naze32/board-info.def
